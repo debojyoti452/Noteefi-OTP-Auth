@@ -11,7 +11,7 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.net.*
 
-object NoteefiRemoteErrorExtractor {
+internal object NoteefiRemoteErrorExtractor {
     fun extractErrorMessage(throwable: Throwable): String {
         return when (throwable) {
             is ConnectException -> CONNECT_EXCEPTION

@@ -2,7 +2,7 @@ package com.swing.lib.src.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class NoteefiRequestModel(
+internal data class NoteefiRequestModel(
 
     @field:SerializedName("api_key")
     val apiKey: String? = null,

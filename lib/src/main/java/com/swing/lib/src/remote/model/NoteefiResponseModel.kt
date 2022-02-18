@@ -2,7 +2,7 @@ package com.swing.lib.src.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class NoteefiResponseModel(
+internal data class NoteefiResponseModel(
     @field:SerializedName("success")
     val success: Boolean? = null,
 
