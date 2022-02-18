@@ -8,7 +8,7 @@ import com.swing.lib.src.remote.repository.NoteefiRepository
 import com.swing.lib.src.utils.NoteefiRemoteErrorExtractor
 
 internal class NoteefiApiImpl constructor(
-    private val service: NetworkModule = NetworkModule(),
+    private val service: NetworkModule,
     private val context: Context
 ) : NoteefiRepository {
     override suspend fun sendOtp(data: NoteefiRequestModel): NoteefiResponseModel {

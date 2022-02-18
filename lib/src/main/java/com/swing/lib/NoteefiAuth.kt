@@ -1,6 +1,7 @@
 package com.swing.lib
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import com.swing.lib.src.component.AuthOtpUseCase
 import com.swing.lib.src.component.NoteefiOnResponse
 import com.swing.lib.src.component.SendOtpUseCase
@@ -30,7 +31,7 @@ class NoteefiAuth constructor() {
         this.responseCallback = responseCallback
     }
 
-
+    @VisibleForTesting
     open class Builder {
         private lateinit var apiKey: String
         private lateinit var context: Context
@@ -63,6 +64,7 @@ class NoteefiAuth constructor() {
         responseCallback.onFailed(NoteefiResponse.Error(throwable.message).exception.toString())
     }
 
+    @VisibleForTesting
     fun authOtp(@NotNull otp: String) {
         runBlocking(exceptionHandler) {
             val res = AuthOtpUseCase(
@@ -85,6 +87,7 @@ class NoteefiAuth constructor() {
         }
     }
 
+    @VisibleForTesting
     fun sentOtp(@NotNull email: String) {
         runBlocking(exceptionHandler) {
             val res = SendOtpUseCase(
