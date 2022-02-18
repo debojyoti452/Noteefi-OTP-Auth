@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdk globalConfiguration["androidCompileSDK"]
+
+    defaultConfig {
+        minSdk globalConfiguration["androidMinSDK"]
+        targetSdk globalConfiguration["androidCompileSDK"]
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        develop {
+            buildConfigField "String", 'NOTEEFI_BASEURL', "\"" + getLocalPropertiesValue("noteefi.dev.baseurl") + "\""
+        }
+    }
+}
+
+dependencies {
+    def ext = rootProject.ext
+
+    implementation(
+            ext.libDependencies.kotlin,
+            ext.libDependencies.kotlinKtx,
+            ext.libDependencies.coroutines,
+            ext.libDependencies.coroutinesAndroid,
+            ext.libDependencies.timber,
+            ext.libDependencies.gson,
+
+            ext.libDependencies.retrofit,
+            ext.libDependencies.retrofitConversion,
+            ext.libDependencies.okHttp,
+            ext.libDependencies.okHttpLoggingInterceptor,
+            ext.libDependencies.retrofitCoroutinesAdapter,
+    )
+
+    testImplementation(
+            ext.testDependencies.junit,
+    )
+}
+
+/**
+ * get value from local.properties
+ *
+ * @return value of the key
+ */
+def getLocalPropertiesValue(key) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty(key)
+}
