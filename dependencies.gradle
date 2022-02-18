@@ -54,3 +54,4 @@ def generateVersionName() {
             "${project.minorVersion}." +
             "${project.patchVersion}"
 }
+

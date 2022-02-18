@@ -62,6 +62,8 @@ dependencies {
 
     testImplementation(
             ext.testDependencies.junit,
+            ext.testDependencies.truth,
+            ext.testDependencies.mockk,
     )
 }
 
